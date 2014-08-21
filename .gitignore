@@ -2,6 +2,7 @@
 capybara-*.html
 .rspec
 .keep
+.project
 /log
 /tmp
 
