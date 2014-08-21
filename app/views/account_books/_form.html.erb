@@ -1,0 +1,15 @@
+<%= simple_form_for @account_book, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :date %>
+  <%= f.input :category %>
+  <%= f.input :money %>
+  <%= f.input :description %>
+  <%= f.input :out %>
+  <%= f.input :in %>
+  <%= f.input :memo %>
+  <%= f.input :status %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                account_books_path, :class => 'btn' %>
+  </div>
+<% end %>
