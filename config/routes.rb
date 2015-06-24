@@ -1,5 +1,9 @@
 Kakeibo::Application.routes.draw do
-  resources :account_books
+  resources :account_books do
+    collection do
+      get 'weekly'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

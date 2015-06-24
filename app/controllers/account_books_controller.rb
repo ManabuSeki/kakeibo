@@ -4,12 +4,21 @@ class AccountBooksController < ApplicationController
   # GET /account_books
   # GET /account_books.json
   def index
-    @account_books = AccountBook.all
+    #@account_books = AccountBook.all
+    @account_books = AccountBook.order(:date).group("category_id").group("date").sum("money")
+    
   end
 
   # GET /account_books/1
   # GET /account_books/1.json
   def show
+  end
+  
+  def weekly
+    today = Date.today
+    startDate = today.beginning_of_week
+    endDate = today.end_of_week
+    @account_books = AccountBook.where("date >= ? and date <= ?",startDate, endDate)
   end
 
   # GET /account_books/new
@@ -69,6 +78,6 @@ class AccountBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_book_params
-      params.require(:account_book).permit(:date, :category, :money, :description, :out, :in, :memo, :status)
+      params.require(:account_book).permit(:date, :category_id, :money, :description, :out, :in, :memo, :status)
     end
 end
