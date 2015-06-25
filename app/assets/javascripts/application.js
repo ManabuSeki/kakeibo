@@ -12,11 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui/datepicker-ja
 //= require twitter/bootstrap
-//= require bootstrap-datepicker
 //= require_tree .
-var data = {'data-format': 'yyyy-MM-dd hh:mm:ss' };
-$(function(){
-    $('.datepicker').attr(data);
-    $('.datepicker').datetimepicker();
-});
