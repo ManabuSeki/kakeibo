@@ -1,0 +1,81 @@
+<h1>Listing meetings</h1>
+<%= month_calendar table: {class: "table table-bordered calendar"}, tr: {class: "calendar-row"}, td: {class: "events"},events: @meetings do |date, meetings| %>
+  <%= date %>
+
+  <% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.name %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= week_calendar table: {class: "table table-bordered calendar"}, tr: {class: "calendar-row"}, td: {class: "events"}, number_of_weeks: 1 ,events: @meetings do |date, meeting| %>
+  <%= date %>
+<br />
+  <% meeting.each do |mt| %>
+    <%= mt.name%>
+  <% end %>
+<% end %>
+
+<%= calendar table: {class: "table table-bordered calendar"}, tr: {class: "calendar-row"}, td: {class: "events"},number_of_days: 7 do |date| %>
+  <%= date %>
+<% end %>
+<br>
+
+
+
+<%= link_to 'New Meeting', new_meeting_path %>
+
+
+
+<br>
+<br>
+<br>
+<br>
+  開始日：<%= @start0 %><br>
+  終了日：<%= @end0 %><br>
+<% @week0.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+<br>
+<br>
+  開始日：<%= @start1 %><br>
+  終了日：<%= @end1 %><br>
+<% @week1.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+<br>
+<br>
+  開始日：<%= @start2 %><br>
+  終了日：<%= @end2 %><br>
+<% @week2.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+<br>
+<br>
+  開始日：<%= @start3 %><br>
+  終了日：<%= @end3 %><br>
+<% @week3.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+<br>
+<br>
+  開始日：<%= @start4 %><br>
+  終了日：<%= @end4 %><br>
+<% @week4.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+<br>
+<br>
+  開始日：<%= @start5 %><br>
+  終了日：<%= @end5 %><br>
+<% @week5.each do |d| %><br />
+  <%= d.date %>
+  &yen;<%= d.money %><br>
+<% end %>
+

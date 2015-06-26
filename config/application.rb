@@ -19,5 +19,6 @@ module Kakeibo
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
      config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
      config.i18n.default_locale = :ja
+     config.secret_key_base = '0cd8fa1764e9068e1e65499168a22cec10bb310de3abfdcb8e73c01778cd86e5f239dd1951ff817d7f8bca119ec96feddf0498143976be40b8d436c98c41d87a'
   end
 end

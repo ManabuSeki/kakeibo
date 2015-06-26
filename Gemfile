@@ -32,6 +32,8 @@ gem 'jquery-ui-rails', '~> 4.2.1'
 
 gem 'bootstrap-datepicker-rails'
 
+gem "simple_calendar"
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -51,3 +53,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'rb-readline'

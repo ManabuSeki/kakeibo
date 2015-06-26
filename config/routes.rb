@@ -1,4 +1,6 @@
 Kakeibo::Application.routes.draw do
+  resources :meetings
+
   resources :account_books do
     collection do
       get 'weekly'
