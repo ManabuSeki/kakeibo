@@ -5,7 +5,7 @@ class AccountBooksController < ApplicationController
   # GET /account_books.json
   def index
     #@account_books = AccountBook.all
-    @account_books = AccountBook.order(:date).group("category_id").group("date").sum("money")
+    @account_books = AccountBook.order(:date, :id).group("category_id").group("date").sum("money")
     
   end
 
@@ -15,10 +15,47 @@ class AccountBooksController < ApplicationController
   end
   
   def weekly
-    today = Date.today
-    startDate = today.beginning_of_week
-    endDate = today.end_of_week
-    @account_books = AccountBook.where("date >= ? and date <= ?",startDate, endDate)
+    #@today = Date.new(2015,6,15)
+    @today = Date.today
+    @year = @today.year
+    @month = @today.month
+    @firstDay = Date.new(@year, @month, 1)
+    @lastDay = Date.new(@year, @month, -1).day
+    @wday = @firstDay.wday
+    @weeks = (@wday + @lastDay + 6) / 7
+
+    @weeks.times do |t|
+      var = "@week"
+      start_day = "@start"
+      end_day = "@end"
+      week_count ="@count"
+      if t == 0
+        @start = @today.beginning_of_month
+        @end = @today.beginning_of_month.end_of_week(:sunday)
+        ac = AccountBook.where('date >= ? and date <= ?',@start,@end)
+        eval("#{var + t.to_s} = ac")
+        eval("#{start_day + t.to_s} = @start")
+        eval("#{end_day + t.to_s} = @end")
+      else
+        @start = @end+ 1.days
+        @end = @start.end_of_week(:sunday)
+        if @end > @today.end_of_month
+          @end = @today.end_of_month
+          ac = AccountBook.where('date >= ? and date <= ?',@start,@today.end_of_month)
+          eval("#{var + t.to_s} = ac")
+          eval("#{start_day + t.to_s} = @start")
+          eval("#{end_day + t.to_s} = @end")
+        else
+          @end
+          ac = AccountBook.where('date >= ? and date <= ?',@start,@end)
+          eval("#{var + t.to_s} = ac")
+          eval("#{start_day + t.to_s} = @start")
+          eval("#{end_day + t.to_s} = @end")
+        end
+      end
+        count = (t + 1).to_s
+        eval("#{week_count + t.to_s} = count")
+    end
   end
 
   # GET /account_books/new
