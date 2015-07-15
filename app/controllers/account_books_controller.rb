@@ -5,7 +5,25 @@ class AccountBooksController < ApplicationController
   # GET /account_books.json
   def index
     #@account_books = AccountBook.all
-    @account_books = AccountBook.order(:date, :id).group("category_id").group("date").sum("money")
+    param = params[:month]
+    begin
+      year = param[0, 4].to_i
+      month = param[5, 6].to_i
+      @today = Date.new(year, month)
+    rescue
+      @today = Date.today
+    end
+    @today = Date.today unless @today.present?
+
+    @year = @today.year
+    @month = @today.month
+    @firstDay = Date.new(@year, @month, 1)
+    @lastDay = Date.new(@year, @month, -1)
+    logger.debug(@firstDay)
+    logger.debug(@lastDay)
+    @account_books = AccountBook.order(:date, :id).where(date: @firstDay..@lastDay).group("category_id").group("date").sum("money")
+    @acs = AccountBook.order(:date, :id).where(date: @firstDay..@lastDay)
+    
     
   end
 
@@ -15,8 +33,15 @@ class AccountBooksController < ApplicationController
   end
   
   def weekly
-    #@today = Date.new(2015,6,15)
-    @today = Date.today
+    param = params[:month]
+    begin
+      year = param[0, 4].to_i
+      month = param[5, 6].to_i
+      @today = Date.new(year, month)
+    rescue
+      @today = Date.today
+    end
+    @today = Date.today unless @today.present?
     @year = @today.year
     @month = @today.month
     @firstDay = Date.new(@year, @month, 1)
@@ -74,7 +99,7 @@ class AccountBooksController < ApplicationController
 
     respond_to do |format|
       if @account_book.save
-        format.html { redirect_to @account_book, notice: 'Account book was successfully created.' }
+        format.html { redirect_to account_books_path, notice: 'Account book was successfully created.' }
         format.json { render action: 'show', status: :created, location: @account_book }
       else
         format.html { render action: 'new' }
@@ -115,6 +140,6 @@ class AccountBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_book_params
-      params.require(:account_book).permit(:date, :category_id, :money, :description, :out, :in, :memo, :status)
+      params.require(:account_book).permit(:date, :category_id, :money, :description, :out, :in, :memo, :status, :month)
     end
 end
