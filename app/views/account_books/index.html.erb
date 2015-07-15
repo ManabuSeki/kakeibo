@@ -1,6 +1,6 @@
 <%- model_class = AccountBook -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Daily</h1>
 </div>
 <table class="table table-bordered">
   <thead>
@@ -29,7 +29,7 @@
         </td>
         <td class="span2"><%= Category.find(account_book[0][0]).name %></td>
         <td class="span3" style="text-align: right;">&yen;<%= account_book[1] %></td>
-        <td></td>
+        <td><%= @ab.first.memo unless @ab.size > 1 %></td>
         <td>
         </td>
       </tr>
