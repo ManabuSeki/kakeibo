@@ -46,12 +46,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="http://localhost:3000/account_books">Kakeibo</a>
+          <%= link_to 'Kakeibo', root_url, class:'brand' %>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "weekly", "account_books/weekly"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "weekly", weekly_account_books_path  %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
