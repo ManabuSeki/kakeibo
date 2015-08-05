@@ -2,6 +2,23 @@
 <div class="page-header">
   <h1>Daily</h1>
 </div>
+<section class="nav-current">
+  <div class="text-left span4" style="float:left">
+    <%= link_to root_path(month:prev_month(@today)), class:'btn btn-large btn-primary' do %>
+      <i class="icon-chevron-left"></i>
+    <% end %>
+  </div>
+  <div class="text-center span4" style="float:left">
+    <h2 style="margin:0"><%= format_year(@today) %></h2>
+  </div>
+  <div class="text-right span4" style="float:left">
+    <%= link_to root_path(month:next_month(@today)), class:'btn btn-large btn-primary' do %>
+      <i class="icon-chevron-right"></i>
+    <% end %>
+  </div>
+</section>
+<div style="clear: both;"></div>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -56,4 +73,4 @@
 </table>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_account_book_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-large  btn-primary' %>

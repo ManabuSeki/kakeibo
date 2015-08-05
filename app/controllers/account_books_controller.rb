@@ -13,7 +13,7 @@ class AccountBooksController < ApplicationController
     rescue
       @today = Date.today
     end
-    @today = Date.today unless @today.present?
+   # @today = Date.today unless @today.present?
 
     @year = @today.year
     @month = @today.month
@@ -22,7 +22,6 @@ class AccountBooksController < ApplicationController
     logger.debug(@firstDay)
     logger.debug(@lastDay)
     @account_books = AccountBook.order(:date, :id).where(date: @firstDay..@lastDay).group("category_id").group("date").sum("money")
-    @acs = AccountBook.order(:date, :id).where(date: @firstDay..@lastDay)
     
     
   end
