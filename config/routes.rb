@@ -1,4 +1,5 @@
 Kakeibo::Application.routes.draw do
+  root 'account_books#index'
   resources :account_books do
     collection do
       get 'weekly'
