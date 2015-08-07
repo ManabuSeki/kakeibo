@@ -9,11 +9,8 @@
     <%= f.input :date, as: :string, label: '年月日',:input_html => {:class => 'datepicker'} %>
     <%= f.association :category, prompt: "カテゴリーを選択" %>
     <%= f.input :money %>
-    <%= f.input :description %>
-    <%= f.input :out %>
-    <%= f.input :in %>
+    <%= f.association :out_category , default: 1%>
     <%= f.input :memo %>
-    <%= f.input :status %>
   </div>
   <div class="modal-footer">
     <%= f.button :submit, :class => 'btn-primary' %>
