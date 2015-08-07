@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h3>削除</h3>
+</div>
+<div class="modal-body">
+  <ul class="errors"></ul>
+  本当に削除してよろしいですか？
+</div>
+<div class="modal-footer">
+  <%= link_to "削除する", account_book_path(@account_book), method: :delete, remote: true, class: "btn btn-danger" %>
+  <%= link_to "キャンセル", "#", class: "btn", data: { dismiss: "modal" } %>
+</div>

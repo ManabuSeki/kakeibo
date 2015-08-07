@@ -1,15 +1,22 @@
-<%= simple_form_for @account_book, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :date, as: :string, label: '年月日',:input_html => {:class => 'datepicker'} %>
-  <%= f.association :category, prompt: "カテゴリーを選択" %>
-  <%= f.input :money %>
-  <%= f.input :description %>
-  <%= f.input :out %>
-  <%= f.input :in %>
-  <%= f.input :memo %>
-  <%= f.input :status %>
-  <div class="form-actions">
+<script>
+  $(function() {
+      $('.datepicker').datepicker();
+  });
+</script>
+<%= simple_form_for @account_book, remote: true, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="modal-body">
+    <ul class="errors"></ul>
+    <%= f.input :date, as: :string, label: '年月日',:input_html => {:class => 'datepicker'} %>
+    <%= f.association :category, prompt: "カテゴリーを選択" %>
+    <%= f.input :money %>
+    <%= f.input :description %>
+    <%= f.input :out %>
+    <%= f.input :in %>
+    <%= f.input :memo %>
+    <%= f.input :status %>
+  </div>
+  <div class="modal-footer">
     <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                account_books_path, :class => 'btn' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), "#", class: "btn", data: {dismiss: "modal"} %>
   </div>
 <% end %>

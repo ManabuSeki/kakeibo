@@ -3,6 +3,7 @@ Kakeibo::Application.routes.draw do
   resources :account_books do
     collection do
       get 'weekly'
+      get 'delete'
     end
   end
 

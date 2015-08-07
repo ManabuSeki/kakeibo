@@ -29,48 +29,9 @@
       <th class="span2"><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
-    <% @account_books.each.with_index(1) do |account_book, i| %>
-      <% @ab =AccountBook.where(date: account_book[0][1], category_id: account_book[0][0]) %>
-      <% if i % 2 == 0 %>
-        <tr class="pop<%= format_id account_book[0][1] %><%=account_book[0][0]%>">
-      <% else %>
-          <tr class="pop<%= format_id account_book[0][1] %><%=account_book[0][0]%>" style="background-color: #f9f9f9;">
-      <% end %>
-        <td class="span2">
-          <% if @ab.size >1 %>
-            <a class="pop" id="<%= format_id account_book[0][1] %><%=account_book[0][0]%>"><%= format_at account_book[0][1] %></div>
-          <% else %>
-           <%= format_at account_book[0][1] %>
-          <% end %>
-        </td>
-        <td class="span2"><%= Category.find(account_book[0][0]).name %></td>
-        <td class="span3" style="text-align: right;">&yen;<%= account_book[1] %></td>
-        <td><%= @ab.first.memo unless @ab.size > 1 %></td>
-        <td>
-        </td>
-      </tr>
-      <% next unless @ab.size > 1 %>
-      <% @ab.each do |ab| %>
-        <tr id="<%= ab.date %>", class="hide_tb<%= format_id ab.date %><%= ab.category_id %>", style="display: none;">
-          <td class="span2"> <%= format_at ab.date %></td>
-          <td><%= ab.category.name %></td>
-          <td style="text-align: right;">&yen;<%= ab.money %></td>
-          <td><%= ab.memo %></td>
-          <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_account_book_path(ab), :class => 'btn btn-small' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      account_book_path(ab),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-small btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
+  <tbody class="account-index">
+    <%= render "index" %>
   </tbody>
 </table>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_account_book_path,
-            :class => 'btn btn-large  btn-primary' %>
+<%= link_to t('.new', :default => t("helpers.links.new")),new_account_book_path, remote: true, :class => 'btn btn-large  btn-primary' %>
+<div id="account-modal" class="modal hide fade"></div>
