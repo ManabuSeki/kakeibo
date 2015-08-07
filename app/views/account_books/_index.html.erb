@@ -16,6 +16,13 @@
       <td class="span3" style="text-align: right;">&yen;<%= account_book[1] %></td>
       <td><%= @ab.first.memo unless @ab.size > 1 %></td>
       <td>
+        <% unless @ab.size > 1 %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_account_book_path(@ab.first),remote: true,  :class => 'btn btn-small' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            delete_account_books_path(id: @ab.first.id), remote: true,
+            :class => 'btn btn-small btn-danger' %>
+        <% end %>
       </td>
     </tr>
     <% next unless @ab.size > 1 %>
